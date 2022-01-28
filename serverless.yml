@@ -119,9 +119,13 @@ resources:
         AttributeDefinitions:
           - AttributeName: agentId
             AttributeType: S
+          - AttributeName: userId
+            AttributeType: S
         KeySchema:
           - AttributeName: agentId
             KeyType: HASH
+          - AttributeName: userId
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1

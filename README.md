@@ -91,6 +91,7 @@ npm run dynamodb:local
 ```javascript
 {
   agentId: '123e4567-e89b-12d3-a456-42661417400',
+  userId: '123e4567-e89b-12d3-a456-426614174000',
   user: {
     userId: '123e4567-e89b-12d3-a456-426614174000',
     email: 'email@email.com',
