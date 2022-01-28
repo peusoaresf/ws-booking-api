@@ -1,0 +1,32 @@
+service: ws-booking-api
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage}
+  environment:
+    STAGE: ${opt:stage}
+    TABLE_AGENTS: booking-agents-${opt:stage}
+
+functions:
+  clientApi:
+    handler: src/api/client/index.handler
+    events:
+      - http:
+          path: /client/
+          method: ANY
+      - http:
+          path: /client/{proxy+}
+          method: ANY
+  businessApi:
+    handler: src/api/business/index.handler
+    events:
+      - http:
+          path: /business/
+          method: ANY
+      - http:
+          path: /business/{proxy+}
+          method: ANY
