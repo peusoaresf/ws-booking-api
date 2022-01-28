@@ -27,3 +27,10 @@ notes
 // No time to do  that today, unfortunately, so i ended up with a couple of examples of how i'd do it :(
 // Regarding integration tests, and being very honest, i haven't had the chance to work with it in the past,
 // and it's a point of improvement i'd like to tackle in the near future
+
+> Misc missing
+
+// API validation (body, query string, params)
+// Data formatting before sending to client
+// Shifting between local and cloud dynamodb is not fully done yet, if this code is used with terraform.
+    // If we let serverless manage the database during deployment, then it works as is

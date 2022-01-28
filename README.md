@@ -11,13 +11,13 @@ npm run dynamodb:local
 2. In a different console, load the mock data
 
 ``` 
-npm dynamodb:local:load
+npm run dynamodb:local:load
 ``` 
 
 3. And start the api
 
 ``` 
-npm start:local
+npm run start:local
 ``` 
 
 Upon start serveless will display in the console output the available apis
