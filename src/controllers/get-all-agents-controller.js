@@ -4,7 +4,9 @@ const agentsRepository = require('../database/repositories/agents-repository')
 
 const getAllAgentsController = async (req, res, next) => {
   try {
-    const result = await agentsRepository.getAllAgents()
+    const result = await agentsRepository.getAllAgents({
+      ExclusiveStartKey: req.query.lastItem,
+    })
 
     res.json(result)
   } catch (err) {
