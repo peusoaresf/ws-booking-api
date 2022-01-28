@@ -5,8 +5,10 @@
   "main": "",
   "scripts": {
     "start": "AWS_PROFILE=booking-dev serverless offline --stage dev --region us-east-1",
+    "start:local": "AWS_PROFILE=default serverless offline --stage local --region us-east-1",
     "test": "jest",
-    "lint": "eslint --ext .js src tests"
+    "lint": "eslint --ext .js src tests",
+    "dynamodb:local": "sls dynamodb start --migrate --stage local"
   },
   "author": "Pedro Ferraz",
   "license": "ISC",
@@ -14,6 +16,7 @@
     "aws-sdk": "^2.879.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
+    "serverless-dynamodb-local": "^0.2.40",
     "serverless-http": "^2.7.0"
   },
   "devDependencies": {

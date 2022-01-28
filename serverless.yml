@@ -1,7 +1,16 @@
 service: ws-booking-api
 
 plugins:
+  - serverless-dynamodb-local
   - serverless-offline
+
+custom:
+  dynamodb:
+    stages:
+      - local
+    start:
+      port: 8000
+      inMemory: true
 
 provider:
   name: aws
@@ -9,7 +18,10 @@ provider:
   stage: ${opt:stage}
   environment:
     STAGE: ${opt:stage}
+    TABLE_USERS: booking-users-${opt:stage}
     TABLE_AGENTS: booking-agents-${opt:stage}
+    TABLE_BOOKINGS: booking-bookings-${opt:stage}
+    TABLE_AGENT_USERS: booking-agent-users-${opt:stage}
 
 functions:
   clientApi:
@@ -30,3 +42,86 @@ functions:
       - http:
           path: /business/{proxy+}
           method: ANY
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TABLE_USERS}
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    agentsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TABLE_AGENTS}
+        AttributeDefinitions:
+          - AttributeName: agentId
+            AttributeType: S
+          - AttributeName: status
+            AttributeType: S
+        KeySchema:
+          - AttributeName: agentId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: status_gsi
+            KeySchema:
+              - AttributeName: status
+                KeyType: HASH
+            Projection:
+              ProjectionType: 'ALL'
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    bookingsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TABLE_BOOKINGS}
+        AttributeDefinitions:
+          - AttributeName: bookingId
+            AttributeType: S
+          - AttributeName: status
+            AttributeType: S
+          - AttributeName: startAtUnique
+            AttributeType: S
+        KeySchema:
+          - AttributeName: bookingId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: status_startAtUnique_gsi
+            KeySchema:
+              - AttributeName: status
+                KeyType: HASH
+              - AttributeName: startAtUnique
+                KeyType: RANGE
+            Projection:
+              ProjectionType: 'ALL'
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    agentUsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.TABLE_AGENT_USERS}
+        AttributeDefinitions:
+          - AttributeName: agentId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: agentId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
