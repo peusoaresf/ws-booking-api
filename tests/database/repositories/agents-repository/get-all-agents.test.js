@@ -5,7 +5,7 @@ test('should get all agents', async () => {
     {
       name: 'Agent Smith',
       email: 'agent@smith.com',
-    }
+    },
   ]
 
   const resultMock = { Items: agentsMock, LastEvaluatedKey: 'lala' }

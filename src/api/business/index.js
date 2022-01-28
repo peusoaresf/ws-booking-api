@@ -5,5 +5,5 @@ const api = apiFactory((app) => {
 }, { basePath: '/business' })
 
 module.exports = {
-  handler: api
+  handler: api,
 }

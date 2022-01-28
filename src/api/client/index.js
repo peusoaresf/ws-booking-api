@@ -5,9 +5,9 @@ const api = apiFactory((app) => {
   app.get('/hello', async (_, res) => {
     const result = await agentsRepository.getAllAgents()
     res.json(result)
-  })    
-}, { basePath: '/client' }) 
+  })
+}, { basePath: '/client' })
 
 module.exports = {
-  handler: api
+  handler: api,
 }
