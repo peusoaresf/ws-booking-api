@@ -2,14 +2,18 @@ const { ADMIN } = require('./commons/roles')
 const hasRole = require('./commons/has-role')
 const bookingsRepository = require('../database/repositories/bookings-repository')
 
-const deleteBookingController = async (req, res) => {
-  const deps = deleteBookingController.dependencies()
+const deleteBookingController = async (req, res, next) => {
+  try {
+    const deps = deleteBookingController.dependencies()
 
-  await deps.bookingsRepository.deleteBooking({
-    id: req.params.id,
-  })
+    await deps.bookingsRepository.deleteBooking({
+      id: req.params.id,
+    })
 
-  res.status(204).end()
+    res.status(204).end()
+  } catch (err) {
+    next(err)
+  }
 }
 
 deleteBookingController.dependencies = () => ({
