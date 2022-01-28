@@ -1,11 +1,11 @@
 const createBooking = require('./create-booking')
 const deleteBooking = require('./delete-booking')
-const getBookingByStartAt = require('./get-bookings-by-start-at')
+const getBookingsByStartAt = require('./get-bookings-by-start-at')
 
 const bookingsRepository = {
   createBooking,
   deleteBooking,
-  getBookingByStartAt,
+  getBookingsByStartAt,
 }
 
 module.exports = bookingsRepository
