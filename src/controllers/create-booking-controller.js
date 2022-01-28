@@ -1,5 +1,5 @@
 const { ADMIN } = require('./commons/roles')
-const hasRole = require('./commons/has-role')
+const hasOneOf = require('./commons/has-one-of')
 const createBookingUC = require('../use-cases/create-booking-uc')
 
 const createBookingController = async (req, res, next) => {
@@ -23,4 +23,4 @@ createBookingController.dependencies = () => ({
   createBookingUC,
 })
 
-module.exports = [hasRole(ADMIN), createBookingController]
+module.exports = [hasOneOf(ADMIN), createBookingController]

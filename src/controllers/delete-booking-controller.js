@@ -1,5 +1,5 @@
 const { ADMIN } = require('./commons/roles')
-const hasRole = require('./commons/has-role')
+const hasOneOf = require('./commons/has-one-of')
 const bookingsRepository = require('../database/repositories/bookings-repository')
 
 const deleteBookingController = async (req, res, next) => {
@@ -20,4 +20,4 @@ deleteBookingController.dependencies = () => ({
   bookingsRepository,
 })
 
-module.exports = [hasRole(ADMIN), deleteBookingController]
+module.exports = [hasOneOf(ADMIN), deleteBookingController]

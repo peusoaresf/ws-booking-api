@@ -1,5 +1,5 @@
 const { ADMIN, REGULAR } = require('./commons/roles')
-const hasRole = require('./commons/has-role')
+const hasOneOf = require('./commons/has-one-of')
 const agentUsersRepository = require('../database/repositories/agent-users-repository')
 
 const getUsersByAgentController = async (req, res, next) => {
@@ -21,4 +21,4 @@ getUsersByAgentController.dependencies = () => ({
   agentUsersRepository,
 })
 
-module.exports = [hasRole(ADMIN, REGULAR), getUsersByAgentController]
+module.exports = [hasOneOf(ADMIN, REGULAR), getUsersByAgentController]
