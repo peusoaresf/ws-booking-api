@@ -5,7 +5,8 @@
   "main": "",
   "scripts": {
     "start": "AWS_PROFILE=booking-dev serverless offline --stage dev --region us-east-1",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .js src tests"
   },
   "author": "Pedro Ferraz",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "serverless-http": "^2.7.0"
   },
   "devDependencies": {
+    "eslint": "^8.7.0",
     "jest": "^27.4.7",
     "serverless": "^2.52.1",
     "serverless-offline": "^6.9.0"
