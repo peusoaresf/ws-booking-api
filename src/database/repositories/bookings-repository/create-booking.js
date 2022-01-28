@@ -1,20 +1,22 @@
+const dynamodb = require('../../dynamodb')
 const logger = require('../../../utils/logger')
 
-const createBooking = async ({
-  userId,
-  agentId,
-  startAt,
-  finishAt,
-}) => {
+const createBooking = async (booking) => {
   logger.info({
     message: 'Creating booking',
-    booking: {
-      userId,
-      agentId,
-      startAt,
-      finishAt,
-    },
+    booking,
+  })
+
+  const deps = createBooking.dependencies()
+
+  return deps.dynamodb.put({
+    TableName: process.env.TABLE_BOOKINGS,
+    Item: booking,
   })
 }
+
+createBooking.dependencies = () => ({
+  dynamodb,
+})
 
 module.exports = createBooking

@@ -1,12 +1,12 @@
 const { ADMIN } = require('./commons/roles')
 const hasRole = require('./commons/has-role')
-const bookingsRepository = require('../database/repositories/bookings-repository')
+const createBookingUC = require('../use-cases/create-booking-uc')
 
 const createBookingController = async (req, res, next) => {
   try {
     const deps = createBookingController.dependencies()
 
-    await deps.bookingsRepository.createBooking({
+    await deps.createBookingUC({
       userId: req.body.userId,
       agentId: req.agentId,
       startAt: req.body.startAt,
@@ -20,7 +20,7 @@ const createBookingController = async (req, res, next) => {
 }
 
 createBookingController.dependencies = () => ({
-  bookingsRepository,
+  createBookingUC,
 })
 
 module.exports = [hasRole(ADMIN), createBookingController]
