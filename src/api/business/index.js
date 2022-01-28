@@ -1,7 +1,8 @@
 const apiFactory = require('../commons/api-factory')
+const getAllAgentsController = require('../../controllers/get-all-agents-controller')
 
 const api = apiFactory((app) => {
-  app.get('/hello', (_, res) => res.json({ hello: `business-${process.env.STAGE}` }))
+  app.get('/agents', getAllAgentsController)
 }, { basePath: '/business' })
 
 module.exports = {

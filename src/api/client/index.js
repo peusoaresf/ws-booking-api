@@ -1,11 +1,8 @@
 const apiFactory = require('../commons/api-factory')
-const agentsRepository = require('../../database/repositories/agents-repository')
+const getAllAgentsController = require('../../controllers/get-all-agents-controller')
 
 const api = apiFactory((app) => {
-  app.get('/hello', async (_, res) => {
-    const result = await agentsRepository.getAllAgents()
-    res.json(result)
-  })
+  app.get('/agents', getAllAgentsController)
 }, { basePath: '/client' })
 
 module.exports = {
