@@ -1,0 +1,52 @@
+{
+  "booking-users-local": [
+    {
+      "userId": "user_1",
+      "email": "user_1@email"
+    },
+    {
+      "userId": "user_2",
+      "email": "user_2@email"
+    },
+    {
+      "userId": "user_3",
+      "email": "user_3@email"
+    }
+  ],
+  "booking-agents-local": [
+    {
+      "agentId": "agent_1",
+      "email": "agent_1@email"
+    },
+    {
+      "agentId": "agent_2",
+      "email": "agent_2@email"
+    }
+  ],
+  "booking-agent-users-local": [
+    {
+      "agentId": "agent_1",
+      "userId": "user_1",
+      "user": {
+        "userId": "user_1",
+        "email": "user_1@email"
+      }
+    },
+    {
+      "agentId": "agent_1",
+      "userId": "user_2",
+      "user": {
+        "userId": "user_2",
+        "email": "user_2@email"
+      }
+    },
+    {
+      "agentId": "agent_2",
+      "userId": "user_3",
+      "user": {
+        "userId": "user_2",
+        "email": "user_2@email"
+      }
+    }
+  ]
+}
