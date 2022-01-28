@@ -17,12 +17,14 @@
     {
       "agentId": "agent_1",
       "email": "agent_1@email",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "roles": ["ADMIN"]
     },
     {
       "agentId": "agent_2",
       "email": "agent_2@email",
-      "status": "ACTIVE"
+      "status": "ACTIVE",
+      "roles": ["REGULAR"]
     }
   ],
   "booking-agent-users-local": [

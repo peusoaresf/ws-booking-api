@@ -69,6 +69,7 @@ npm run dynamodb:local
 {
   agentId: '123e4567-e89b-12d3-a456-426614174000',
   email: 'email@email.com',
+  roles: ['ADMIN']
 }
 ```
 
