@@ -8,7 +8,13 @@
 npm run dynamodb:local
 ``` 
 
-2. In a different console, start the api
+2. In a different console, load the mock data
+
+``` 
+npm dynamodb:local:load
+``` 
+
+3. And start the api
 
 ``` 
 npm start:local
