@@ -1,13 +1,9 @@
-const express = require('express')
-const serverless = require('serverless-http')
+const apiFactory = require('../commons/api-factory')
 
-const app = express()
+const api = apiFactory((app) => {
+  app.get('/hello', (_, res) => res.json({ hello: `business-${process.env.STAGE}` }))
+}, { basePath: '/business' })
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-
-app.get('/hello', (_, res) => res.json({ hello: `business-${process.env.STAGE}` }))
-
-module.exports ={
-  handler: serverless(app, { basePath: '/business' })
-} 
+module.exports = {
+  handler: api
+}
