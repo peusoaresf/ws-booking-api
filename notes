@@ -1,0 +1,29 @@
+notes
+
+> Node/Js version and config
+
+// Unfortunately no import/export :(
+// I tried for a while to configure it to work with both serverless framework and jest, but JS was'nt being nice to me xD
+// I usually use import/export when writing typescript code, because it kind of comes bundled with it, and javascript usually
+// is in the style used in this repo.
+// Not to say that there isn't any modern syntax, cause I try to use at least async/await, spread and destructuring as much as possible.
+
+> Database
+
+// I decided to go with dynamo as db because it allows rapid prototyping and testing (cause of the no sql nature), and it was enough to serve all query needs.
+// But at the end of the day I ended up with some duplicate data, mostly references to user or agent.
+// With more time in hands I would either remodel the tables, maybe using single table design, to allow for actual queryable references instead
+// of duplication, or some async mechanism to deal with eventual consistency whenever user or agent would be updated.
+
+> Authentication/Authorization
+
+// Regarding authentication and authorization, in a real application I'd most likely use a JWT with roles/user data encoded into it.
+// In the exercise I ended up querying the database for each request in order to validate the user's roles, since all we had was it's id.
+
+> Specs
+
+// I chose Jest as the testing framework, since it's the one i'm most comfortable with.
+// To  be able to say that the app is production ready, i'd have to at least write a couple of unit test cases for every module.
+// No time to do  that today, unfortunately, so i ended up with a couple of examples of how i'd do it :(
+// Regarding integration tests, and being very honest, i haven't had the chance to work with it in the past,
+// and it's a point of improvement i'd like to tackle in the near future
