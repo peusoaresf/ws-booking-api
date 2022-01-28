@@ -1,13 +1,13 @@
 const { ADMIN } = require('./commons/roles')
 const hasOneOf = require('./commons/has-one-of')
-const bookingsRepository = require('../database/repositories/bookings-repository')
+const deleteBookingUC = require('../use-cases/delete-booking-uc')
 
 const deleteBookingController = async (req, res, next) => {
   try {
     const deps = deleteBookingController.dependencies()
 
-    await deps.bookingsRepository.deleteBooking({
-      id: req.params.id,
+    await deps.deleteBookingUC({
+      bookingId: req.params.id,
     })
 
     res.status(204).end()
@@ -17,7 +17,7 @@ const deleteBookingController = async (req, res, next) => {
 }
 
 deleteBookingController.dependencies = () => ({
-  bookingsRepository,
+  deleteBookingUC,
 })
 
 module.exports = [hasOneOf(ADMIN), deleteBookingController]
