@@ -2,11 +2,19 @@
 
 ## Starting local app
 
-Upon start serveless will display in the console output the available apis
+1. Start dynamodb
 
 ```
+npm run dynamodb:local
+``` 
+
+2. In a different console, start the api
+
+``` 
 npm start:local
 ``` 
+
+Upon start serveless will display in the console output the available apis
 
 ## Unit Testing
 
