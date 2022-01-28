@@ -3,9 +3,8 @@ const logger = require('../../utils/logger')
 const routeNotFoundHandler = (req, res, next) => {
   const error = new Error('Route not found')
   error.status = 404
-  error.message = 'Route not found'
   error.name = 'RouteNotFoundError'
-  next()
+  next(error)
 }
 
 // eslint-disable-next-line no-unused-vars
