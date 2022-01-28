@@ -1,5 +1,6 @@
 const query = require('./query')
 
+// TODO: decode ExclusiveStartKey from base64 and encode LastEvaluatedKey to base64
 const paginatedQuery = async ({
   ExclusiveStartKey,
   Limit = 10,
