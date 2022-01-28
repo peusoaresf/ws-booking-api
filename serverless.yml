@@ -18,10 +18,20 @@ provider:
   stage: ${opt:stage}
   environment:
     STAGE: ${opt:stage}
-    TABLE_USERS: booking-users-${opt:stage}
+    TABLE_USERS: booking-users-${opt:stage} # Example of ssm ref: ${ssm:/${opt:stage}/dynamodb/table/users}
     TABLE_AGENTS: booking-agents-${opt:stage}
     TABLE_BOOKINGS: booking-bookings-${opt:stage}
     TABLE_AGENT_USERS: booking-agent-users-${opt:stage}
+    # TABLE_USERS_ARN: ${ssm:/${opt:stage}/dynamodb/table/users_arn} # Example of arn ref
+  # Example of IAM roles given to the exposed apis
+  # iam:
+  #   role:
+  #     statements:
+  #       - Effect: Allow
+  #         Action:
+  #           - dynamodb:GetItem
+  #         Resource: ${self:provider.environment.TABLE_USERS_ARN}
+
 
 functions:
   clientApi:
