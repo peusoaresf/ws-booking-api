@@ -16,11 +16,13 @@
   "booking-agents-local": [
     {
       "agentId": "agent_1",
-      "email": "agent_1@email"
+      "email": "agent_1@email",
+      "status": "ACTIVE"
     },
     {
       "agentId": "agent_2",
-      "email": "agent_2@email"
+      "email": "agent_2@email",
+      "status": "ACTIVE"
     }
   ],
   "booking-agent-users-local": [
