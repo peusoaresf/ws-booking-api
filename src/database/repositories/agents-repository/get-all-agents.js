@@ -1,19 +1,21 @@
-const agentsMock = [
-  {
-    name: 'Agent Smith',
-    email: 'agent@smith.com',
-  },
-]
+const dynamodb = require('../../dynamodb')
 
 const getAllAgents = async ({
   ExclusiveStartKey,
 } = {}) => {
   const deps = getAllAgents.dependencies()
 
-  const { Items, LastEvaluatedKey } = await deps.dynamodb.scan({
+  const { Items, LastEvaluatedKey } = await deps.dynamodb.paginatedQuery({
     TableName: process.env.TABLE_AGENTS,
-    Limit: 10,
     ExclusiveStartKey,
+    IndexName: 'status_gsi',
+    KeyConditionExpression: '#status = :status',
+    ExpressionAttributeNames: {
+      '#status': 'status',
+    },
+    ExpressionAttributeValues: {
+      ':status': 'ACTIVE',
+    },
   })
 
   return {
@@ -23,9 +25,7 @@ const getAllAgents = async ({
 }
 
 getAllAgents.dependencies = () => ({
-  dynamodb: {
-    scan: () => Promise.resolve({ Items: agentsMock, LastEvaluatedKey: 'lala' }),
-  },
+  dynamodb,
 })
 
 module.exports = getAllAgents
