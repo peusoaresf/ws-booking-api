@@ -1,39 +1,44 @@
+const dynamodb = require('../../dynamodb')
 const logger = require('../../../utils/logger')
 
 const getBookingsByStartAt = async ({
   startAt,
+  ExclusiveStartKey,
 }) => {
   logger.info({
     message: 'Getting bookings by start at',
     startAt,
+    ExclusiveStartKey,
   })
 
-  return Promise.resolve([
-    {
-      start_at: '2022-01-28T12:22:53.367Z',
-      finish_at: '2022-01-28T12:22:53.367Z',
-      user: {
-        name: 'User 1',
-        email: 'user1@email.com',
-      },
-      agent: {
-        name: 'Agent 1',
-        email: 'agent1@email.com',
-      },
+  const deps = getBookingsByStartAt.dependencies()
+
+  const endDate = new Date(startAt)
+  endDate.setDate(endDate.getDate() + 6)
+
+  const { Items, LastEvaluatedKey } = await deps.dynamodb.paginatedQuery({
+    TableName: process.env.TABLE_BOOKINGS,
+    IndexName: 'status_startAtUnique_gsi',
+    KeyConditionExpression: '#status = :status and startAtUnique between :start and :end',
+    ExpressionAttributeNames: {
+      '#status': 'status',
     },
-    {
-      start_at: '2022-01-28T12:22:53.367Z',
-      finish_at: '2022-01-28T12:22:53.367Z',
-      user: {
-        name: 'User 1',
-        email: 'user1@email.com',
-      },
-      agent: {
-        name: 'Agent 1',
-        email: 'agent1@email.com',
-      },
+    ExpressionAttributeValues: {
+      ':status': 'ACTIVE',
+      ':start': startAt,
+      ':end': endDate.toISOString(),
     },
-  ])
+    ExclusiveStartKey,
+  })
+
+  return {
+    items: Items,
+    lastItem: LastEvaluatedKey,
+  }
 }
+
+getBookingsByStartAt.dependencies = () => ({
+  dynamodb,
+})
 
 module.exports = getBookingsByStartAt
